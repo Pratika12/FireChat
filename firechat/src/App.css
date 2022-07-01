@@ -1,0 +1,28 @@
+*
+{
+  box-sizing: border-box;
+}
+
+/* NAVBAR */
+
+nav
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height:70px;
+  padding: 0px 20px;
+  background-color:#242526;
+  border-bottom: 1px solid #333 ;
+}
+
+nav a
+{
+  color : white;
+  text-decoration: none;
+}
+
+nav div a
+{
+  margin-right: 20px;
+}
