@@ -6,7 +6,7 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import AuthProvider from './context/auth'
 import PrivateRoute from './components/PrivateRoute';
-import {Fragment} from 'react'
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <Routes>
               <Route exact path="/" element={<PrivateRoute/>}>
                 <Route exact path='/' element={<Home/>}/>
+                <Route exact path='/Profile' element={<Profile/>}/>
               </Route>
               <Route path='/Register' element={<Register/>}/>
               <Route path='/Login' element={<Login/>}/>
