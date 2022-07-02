@@ -1,21 +1,20 @@
 import React,{useState} from 'react'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
-import {setDoc, doc,Timestamp} from 'firebase/firestore'
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import {updateDoc, doc} from 'firebase/firestore'
 import {auth,db} from "../firebase"
 import {useNavigate} from 'react-router-dom'
 
 
-export default function Register() 
+export default function Login() 
 {
   const [data,setData]=useState({
-    Name:'',
     Email:'',
     Pass:'',
     error:null,
     loading:false
   });
 
-  const {Name, Email, Pass, error, loading}= data;
+  const {Email, Pass, error, loading}= data;
   const navigate=useNavigate();
 
   const handleonChange = e =>{
@@ -27,25 +26,21 @@ export default function Register()
 
     setData({...data,error:null,loading:true});
 
-    if(!Name || !Email || !Pass)
+    if(!Email || !Pass)
     {
       setData({...data,error:"All fields are required"})
     }
 
     try
     {
-      const result = await createUserWithEmailAndPassword(auth,Email,Pass);
+      const result = await signInWithEmailAndPassword(auth,Email,Pass);
       // console.log(result);
 
-      await setDoc(doc(db,"Users",result.user.uid),{
-        uid:result.user.uid,
-        Name,
-        Email,
-        createdAt:Timestamp.fromDate(new Date()),
+      await updateDoc(doc(db,"Users",result.user.uid),{
         isOnline:true
       })
 
-      setData({Name:'',Email:'',Pass:'',error:null,loading:false});
+      setData({Email:'',Pass:'',error:null,loading:false});
       navigate('/');
     }
     catch(err)
@@ -55,13 +50,8 @@ export default function Register()
   }
   return (
     <section>
-      <h3>Create an Account</h3>
+      <h3>Login to your Account</h3>
       <form action="" className="form">
-
-        <div className="input_container">
-          <label htmlFor="name">Name</label>
-          <input type="text" name="Name" id="name" value={Name}  onChange={handleonChange}/>
-        </div>
 
         <div className="input_container">
           <label htmlFor="email">Email</label>
@@ -77,7 +67,7 @@ export default function Register()
           error ? <p className="error">{error}</p> : null
         }
         <div className="btn_container">
-          <button className="btn" disabled={loading} onClick={(e)=>handleSubmit(e)} > {loading ? "Creating.." : "Register"}</button>
+          <button className="btn" disabled={loading} onClick={(e)=>handleSubmit(e)}>{loading ? "Logging In" : "Login"}</button>
         </div>
       </form>
     </section>
