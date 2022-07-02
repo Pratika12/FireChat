@@ -26,3 +26,72 @@ nav div a
 {
   margin-right: 20px;
 }
+
+/* Register */
+section
+{
+  max-width: 500px;
+  margin:0 auto;
+  margin-top:100px;
+  box-shadow: 1px 2px 10px grey;
+  padding: 10px 20px;
+  border-radius: 5px;
+}
+
+section h3
+{
+  text-align: center;
+  font-size: 20px;
+  color:grey;
+}
+
+section .form
+{
+  margin-top: 30px;
+  padding:0 20px;
+}
+
+.input_container
+{
+  margin-top: 20px;
+}
+
+.input_container input
+{
+  width:100%;
+  padding:10px;
+  outline:none;
+  margin-top: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+.btn_container
+{
+  margin:10px;
+  text-align: center;
+}
+
+.btn
+{
+  padding: 10px;
+  border-radius: 5px;
+  outline:none;
+  border: 1px solid #333;
+  background: #242526;
+  color:white;
+  cursor: pointer;
+  transition: 0.3 ease-in-out all;
+  font-size: 16px;
+}
+
+.btn:hover
+{
+  font-size: 1.05rem;
+}
+
+.error
+{
+  text-align: center;
+  color:#eb4034;
+}
