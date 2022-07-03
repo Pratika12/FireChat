@@ -1,9 +1,10 @@
 import React from 'react'
-import {db,auth} from '../firebase'
-import {collection,query,where,onSnapshot} from 'firebase/firestore'
+import {db,auth,storage} from '../firebase'
+import {collection, query, where, onSnapshot, addDoc,Timestamp} from 'firebase/firestore'
 import { useEffect,useState } from 'react'
 import User from '../components/User'
 import MessageForm from '../components/MessageForm'
+import {ref,getDownloadURL,uploadBytes} from 'firebase/storage'
 
 
 const Home = () => 
@@ -11,6 +12,12 @@ const Home = () =>
   //array of users
   const [users,setUsers]=useState([]);
   const [chat, setChat]=useState('');
+  const [text,setText]=useState('');
+  const [image,setImage]=useState('');
+
+  const user1=auth.currentUser.uid;
+  //user1- currently logged in user
+  //chat- selected user is stored in chat variable through selectUser function
 
   //function for displaying User Chat when clicked on Users name
   const selectUser =(user)=>
@@ -42,6 +49,33 @@ const Home = () =>
   console.log(users);
 
 
+  const handleSubmit = async e =>
+  {
+    e.preventDefault();
+    const user2=chat.uid;
+    const id= user1 > user2 ? `${user1 + user2}` :`${user2 + user1}`;
+    let url;
+    if(image)
+    {
+      const imageRef= ref(storage, `images/${new Date().getTime()}`)
+      const snapImg= await uploadBytes(imageRef,image);
+      const dlurl=await getDownloadURL(ref(storage,snapImg.ref.fullPath));
+      url=dlurl;
+    }
+
+    // we cant use add doc method on document itself that's why we are adding subcollection
+    await addDoc(collection(db,'messages',id , 'chat'),{
+      text,
+      from:user1,
+      to:user2,
+      createdAt:Timestamp.fromDate(new Date()),
+      media: url || ""
+    });
+    setText('');
+  }
+
+
+
   return (
   <div className='home_container'>
     <div className="users_container">
@@ -60,7 +94,7 @@ const Home = () =>
               <h3>{chat.Name}</h3>
             </div>
             <div>
-              <MessageForm/>
+              <MessageForm text={text} handleSubmit={handleSubmit} setText={setText} setImage={setImage}/>
             </div>
         </div>
         :
