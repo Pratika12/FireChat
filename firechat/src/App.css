@@ -239,3 +239,31 @@ section .form
   color:grey;
   text-align: center;
 }
+
+/* Message Form */
+.message_form
+{
+  position:absolute;
+  bottom:0;
+  left:27%;
+  width:100%;
+  height:30px;
+  display: flex;
+  align-items:center;
+  margin-bottom: 20px;
+}
+
+.message_form input
+{
+  width:70vh;
+  margin:0px 10px;
+  padding:10px;
+  border-radius: 5px;
+  outline:none;
+  border:none;
+}
+
+.message_form .btn
+{
+  margin-top: -10px;
+}
