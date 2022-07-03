@@ -4,12 +4,22 @@ import Camera from '../components/svg/Camera'
 import { storage ,db,auth} from '../firebase';
 import {ref,getDownloadURL,uploadBytes,deleteObject} from 'firebase/storage'
 import {getDoc,doc, updateDoc} from 'firebase/firestore'
-
+import Trash from '../components/svg/Trash';
 
 export default function Profile() 
 {
   const [image , setImage]=useState('');
   const [user,setUser]=useState('');
+
+  const DeleteImage= async ()=>
+  {
+    await deleteObject(ref(storage,user.avatarPath));
+    await updateDoc(doc(db,"Users",auth.currentUser.uid),{
+      avatar:'',
+      avatarPath:''
+    })
+  }
+
   getDoc(doc(db,'Users',auth.currentUser.uid)).then (docSnap=>{
     if(docSnap.exists)
     {
@@ -65,6 +75,7 @@ export default function Profile()
               <label htmlFor="photo">
                 <Camera/>
               </label>
+              {user.avatar ? <Trash DeleteImage={DeleteImage}/>:null} 
               <input type="file" accept='image/'  id="photo" style={{display:'none'}} onChange={e=>setImage(e.target.files[0])}/>
             </div>
           </div>
