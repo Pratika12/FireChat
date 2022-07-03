@@ -1,9 +1,9 @@
 import React from 'react'
 import Img from '../profile_img.png'
 
-export default function User({user}) {
+export default function User({user,selectedUser}) {
   return (
-    <div className='user_wrapper'>
+    <div className='user_wrapper' onClick={()=>selectedUser(user)}>
       <div className='user_info'>
         <div className='user_detail'>
           <img src={user.avatar || Img} alt="avatar" className='avatar' />
