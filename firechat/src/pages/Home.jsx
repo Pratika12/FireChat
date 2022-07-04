@@ -93,6 +93,7 @@ const Home = () =>
     {
       // document.xyz.textinput.value = document.xyz.textinput.charAt(0).toUpperCase() + document.xyz.textinput.slice(1);
       const t=text.charAt(0).toUpperCase() + text.slice(1);
+      // console.log(text);
       await addDoc(collection(db,'messages',id , 'chat'),{
         text:t,
         from:user1,
@@ -111,7 +112,7 @@ const Home = () =>
     <div className="users_container">
       {
         users.map(user=>
-        <User key={user.uid} user={user} selectedUser={selectUser}/>
+        <User key={user.uid} user={user} selectedUser={selectUser} chat={chat}/>
         )
       }
     </div>

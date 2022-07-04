@@ -314,7 +314,60 @@ section .form
   color: white;
 }
 
+.selected_User
+{
+  background:#333;
+}
+
 .friend
 {
   background: #333;
+}
+.small_screen
+{
+  display: none;
+}
+
+/* Creating Chat Window responsive */
+
+@media screen and (max-width: 767px)
+{
+  .home_container{
+    grid-template-columns: 2fr 3fr;
+  }
+  .message_form
+  {
+    left:3%;
+    right:0;
+  }
+}
+
+@media screen and (max-width: 576px)
+{
+  .home_container{
+    grid-template-columns: 0.7fr 3fr;
+  }
+  .user_wrapper
+  {
+    display: none;
+  }
+  .small_container
+  {
+    padding: 10px 0px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .small_screen
+  {
+    display: inline-block;
+  }
+  .message_form input
+  {
+    width:50vw;
+    margin:0px 10px;
+  }
+  .msg_wrapper p
+  {
+    max-width: 100%;
+  }
 }
