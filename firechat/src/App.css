@@ -2,6 +2,10 @@
 {
   box-sizing: border-box;
 }
+body
+{
+  background-color: #f5d1af;
+}
 
 /* NAVBAR */
 
@@ -12,8 +16,9 @@ nav
   justify-content: space-between;
   height:70px;
   padding: 0px 20px;
-  background-color:#262524;
-  border-bottom: 1px solid #333 ;
+  /* background-color:#262524; */
+  border-bottom: 1px solid white ;
+  background: #8d600e;  
 }
 
 nav a
@@ -33,7 +38,7 @@ section
   max-width: 500px;
   margin:0 auto;
   margin-top:100px;
-  box-shadow: 1px 2px 10px grey;
+  box-shadow: 1px 2px 10px #8d600e;
   padding: 10px 20px;
   border-radius: 5px;
 }
@@ -42,7 +47,7 @@ section h3
 {
   text-align: center;
   font-size: 20px;
-  color:grey;
+  color:#8d600e;
 }
 
 section .form
@@ -51,9 +56,16 @@ section .form
   padding:0 20px;
 }
 
+span
+{
+  color:#8d600e;
+}
+
 .input_container
 {
   margin-top: 20px;
+  color:#8d600e;
+  font-weight: 500;
 }
 
 .input_container input
@@ -62,7 +74,7 @@ section .form
   padding:10px;
   outline:none;
   margin-top: 10px;
-  border: 1px solid #333;
+  border: 1px solid white;
   border-radius: 5px;
 }
 
@@ -77,8 +89,8 @@ section .form
   padding: 10px;
   border-radius: 5px;
   outline:none;
-  border: 1px solid #333;
-  background: #242526;
+  border: 1px solid white;
+  background: #8d600e;
   color:white;
   cursor: pointer;
   transition: 0.3 ease-in-out all;
@@ -124,7 +136,7 @@ section .form
 
 .img_container:hover img
 {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 
 .img_container:hover .overlay
@@ -146,6 +158,8 @@ section .form
 .text_container
 {
   align-items: center;
+  color: #8d600e;
+
 }
 
 /* HOME PAGE */
@@ -162,9 +176,10 @@ section .form
 
 .users_container
 {
-  margin-top: 10px;
-  border-right: 2px solid #333;
+  /* margin-top: 10px; */
+  border-right: 2px solid white;
   overflow-y:auto;
+  background-color: #8d600e;
   /* If user List keep growing the scrollbar */
 }
 
@@ -193,6 +208,7 @@ section .form
 .user_detail h4
 {
   margin-left: 10px;
+  color: #242526;
 }
 
 .avatar
@@ -230,13 +246,15 @@ section .form
 {
   padding: 10px;
   text-align: center;
-  border-bottom: 2px solid #333;
+  border-bottom: 2px solid white;
+  color: #242526;
+  /* background: #8d600e; */
 }
 
 .No_User_Selected
 {
   font-size: 20px;
-  color:grey;
+  color:#8d600e;
   text-align: center;
 }
 
@@ -245,7 +263,7 @@ section .form
 {
   position:absolute;
   bottom:0;
-  left:27%;
+  left:20%;
   width:100%;
   height:30px;
   display: flex;
@@ -272,12 +290,12 @@ section .form
 {
   height: calc(100vh - 220px);
   overflow-y: auto;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid white;
 }
 .msg_wrapper
 {
   /* margin-top: 2px; */
-  padding: 0 2px;
+  padding: 0 5px;
 }
 
 .msg_wrapper img
@@ -294,6 +312,7 @@ section .form
   max-width: 50%;
   text-align: left;
   border-radius: 5px;
+  margin: 16px;
 }
 
 .msg_wrapper small
@@ -310,13 +329,13 @@ section .form
 
 .me
 {
-  background: #0084ff;
+  background: #8d600e;
   color: white;
 }
 
 .selected_User
 {
-  background:#333;
+  background:white;
 }
 
 .friend

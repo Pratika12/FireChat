@@ -67,7 +67,7 @@ export default function Login()
           error ? <p className="error">{error}</p> : null
         }
         <div className="btn_container">
-          <button className="btn" disabled={loading} onClick={(e)=>handleSubmit(e)}>{loading ? "Logging In" : "Login"}</button>
+          <button className="btn" disabled={loading} onClick={(e)=>handleSubmit(e)}>{loading ? "Logging In..." : "Login"}</button>
         </div>
       </form>
     </section>

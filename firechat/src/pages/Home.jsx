@@ -89,7 +89,7 @@ const Home = () =>
     }
 
     // we cant use add doc method on document itself that's why we are adding subcollection
-    if(text!=='')
+    if(text!=='' || url!='')
     {
       // document.xyz.textinput.value = document.xyz.textinput.charAt(0).toUpperCase() + document.xyz.textinput.slice(1);
       const t=text.charAt(0).toUpperCase() + text.slice(1);

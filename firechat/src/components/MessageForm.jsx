@@ -11,7 +11,7 @@ export default function MessageForm({handleSubmit,text,setText,setImage}) {
         <div>
             <input type="text" placeholder="Enter Message" id=""  value={text} onChange={(e)=>setText(e.target.value)}/>
         </div>
-        <div>
+        <div className='formm'>
             <button className='btn'>Send</button>
         </div>
     </form>

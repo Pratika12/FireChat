@@ -35,12 +35,13 @@ export default function Profile()
       const uploadImage= async ()=>
       {
         const imageRef=ref(storage,`avatar/${new Date().getTime()} - ${image.name}`);
+        console.log(imageRef);
         try
         {
           const snap=await uploadBytes(imageRef,image);
-          // console.log(snap.ref.fullPath);
+          console.log(snap.ref.fullPath);
           const url= await getDownloadURL(ref(storage,snap.ref.fullPath));
-          // console.log(path,url);
+          console.log(snap.ref.fullPath,url);
 
           if(user.avatarPath)
           {
@@ -87,12 +88,10 @@ export default function Profile()
             <span id="email"> {user.Email}</span>
           </div>
           
-          <small>
             <div style={{textAlign:"center",margin:"10px"}}>
               <label htmlFor="Joined" style={{fontWeight:"800"}}>Account Created On :</label>
               <span id="Joined"> {user.createdAt.toDate().toDateString()}</span>
             </div>
-          </small>
         </div>
       </div>
     </section>
