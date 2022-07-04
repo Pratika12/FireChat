@@ -1,10 +1,14 @@
 import moment from 'moment'
-import React from 'react'
+import React,{useRef,useEffect} from 'react'
 
 export default function Message ({msg,user1}) {
   var i;
+  const scrollRef = useRef();
+  useEffect(()=>{
+    scrollRef.current?.scrollIntoView({behavior:"smooth"})
+  },[msg])
   return (
-    <div className={`msg_wrapper ${msg.from === user1 ? 'own' : ''}`}>
+    <div className={`msg_wrapper ${msg.from === user1 ? 'own' : ''}`} ref={scrollRef}>
       <p className={msg.from ===user1 ? "me" :"friend"}>
         {msg.media ? <img src={msg.media} alt={msg.text}/> : null}
         {msg.text}
