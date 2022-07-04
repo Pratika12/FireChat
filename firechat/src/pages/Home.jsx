@@ -1,10 +1,12 @@
 import React from 'react'
 import {db,auth,storage} from '../firebase'
-import {collection, query, where, onSnapshot, addDoc,Timestamp} from 'firebase/firestore'
+import {collection, query, where, onSnapshot, addDoc,Timestamp,orderBy, QuerySnapshot} from 'firebase/firestore'
 import { useEffect,useState } from 'react'
 import User from '../components/User'
 import MessageForm from '../components/MessageForm'
 import {ref,getDownloadURL,uploadBytes} from 'firebase/storage'
+import Message from '../components/Message' 
+import moment from 'moment'
 
 
 const Home = () => 
@@ -14,6 +16,7 @@ const Home = () =>
   const [chat, setChat]=useState('');
   const [text,setText]=useState('');
   const [image,setImage]=useState('');
+  const [msgs,setMsgs]=useState([]);
 
   const user1=auth.currentUser.uid;
   //user1- currently logged in user
@@ -23,7 +26,28 @@ const Home = () =>
   const selectUser =(user)=>
   {
     setChat(user);
-  }
+    //show conversation between Users
+    const user2=user.uid;
+    const id= user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+
+    const msgsRef = collection (db,'messages',id,'chat');
+    const q=query(msgsRef,orderBy('createdAt','asc'));
+
+    //execute Query
+    //onSnapshot- real time Listener update on every new msg
+
+    onSnapshot(q, (querySnapshot) =>
+    {
+      let msgs=[];
+      querySnapshot.forEach((doc)=>
+      {
+        msgs.push(doc.data());
+      });
+      setMsgs(msgs);
+    });
+  };
+
+  // console.log(msgs);
 
 
   useEffect(()=> {
@@ -46,7 +70,8 @@ const Home = () =>
     });
     return ()=>unsub();
   },[]);
-  console.log(users);
+
+  // console.log(users);
 
 
   const handleSubmit = async e =>
@@ -64,13 +89,18 @@ const Home = () =>
     }
 
     // we cant use add doc method on document itself that's why we are adding subcollection
-    await addDoc(collection(db,'messages',id , 'chat'),{
-      text,
-      from:user1,
-      to:user2,
-      createdAt:Timestamp.fromDate(new Date()),
-      media: url || ""
-    });
+    if(text!=='')
+    {
+      // document.xyz.textinput.value = document.xyz.textinput.charAt(0).toUpperCase() + document.xyz.textinput.slice(1);
+      const t=text.charAt(0).toUpperCase() + text.slice(1);
+      await addDoc(collection(db,'messages',id , 'chat'),{
+        text:t,
+        from:user1,
+        to:user2,
+        createdAt:Timestamp.fromDate(new Date()),
+        media: url || ""
+      });
+    }
     setText('');
   }
 
@@ -92,6 +122,12 @@ const Home = () =>
         <div>
             <div className="message_user">
               <h3>{chat.Name}</h3>
+            </div>
+            <div className="messages">
+              {
+              msgs.length ? msgs.map((msg,i)=> <Message key={i} msg={msg} user1={user1} />)
+              :null
+              }
             </div>
             <div>
               <MessageForm text={text} handleSubmit={handleSubmit} setText={setText} setImage={setImage}/>
