@@ -3,6 +3,7 @@ import React,{useRef,useEffect} from 'react'
 
 export default function Message ({msg,user1}) {
   var i;
+  console.log(i);
   const scrollRef = useRef();
   useEffect(()=>{
     scrollRef.current?.scrollIntoView({behavior:"smooth"})
@@ -16,7 +17,7 @@ export default function Message ({msg,user1}) {
         {/* npm install moment react-moment */}
         <small>
           {
-          i=moment(msg.createdAt.toDate(),'DD/MM/YYYY').fromNow()
+            i=moment(msg.createdAt.toDate(),'DD/MM/YYYY').fromNow()
           }
         </small>
       </p>

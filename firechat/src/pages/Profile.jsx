@@ -11,7 +11,7 @@ export default function Profile()
   const [image , setImage]=useState('');
   const [user,setUser]=useState('');
 
-  const DeleteImage= async ()=>
+  const DeleteImage= async () =>
   {
     await deleteObject(ref(storage,user.avatarPath));
     await updateDoc(doc(db,"Users",auth.currentUser.uid),{
@@ -29,12 +29,11 @@ export default function Profile()
 
   useEffect(()=>
   {
-
     if(image)
     {
       const uploadImage= async ()=>
       {
-        const imageRef=ref(storage,`avatar/${new Date().getTime()} - ${image.name}`);
+        const imageRef=ref(storage,`Profile/${new Date().getTime()} - ${image.name}`);
         console.log(imageRef);
         try
         {

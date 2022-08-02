@@ -15,14 +15,16 @@ export default function Register()
     loading:false
   });
 
-  const {Name, Email, Pass, error, loading}= data;
+  const {Name, Email, Pass, error, loading} = data;
   const navigate=useNavigate();
 
-  const handleonChange = e =>{
+  const handleonChange = e =>
+  {
     setData({ ...data,[e.target.name]:e.target.value});
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => 
+  {
     e.preventDefault();
 
     setData({...data,error:null,loading:true});
@@ -50,7 +52,7 @@ export default function Register()
     }
     catch(err)
     {
-      setData({...data,error:err.message,loading:false});
+      setData({...data,error:"Invalid Details",loading:false});
     }
   }
   return (

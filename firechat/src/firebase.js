@@ -7,7 +7,8 @@ import {getStorage} from 'firebase/storage'
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
+const firebaseConfig = 
+{
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_API_DOMAIN,
   databaseURL:process.env.REACT_APP_DATABASE_URL,
@@ -22,5 +23,4 @@ const app = initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 const storage=getStorage(app);
-
 export {auth,db,storage};

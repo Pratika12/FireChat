@@ -6,8 +6,8 @@ import {updateDoc,doc} from 'firebase/firestore'
 import {AuthContext} from '../context/auth'
 import {useNavigate} from 'react-router-dom'
 
-export default function Navbar() {
-
+export default function Navbar() 
+{
    const {user}=useContext(AuthContext);
    const navigate=useNavigate();
    const handleSignOut = async () =>
@@ -18,9 +18,7 @@ export default function Navbar() {
    }
   return (
     <nav>
-       <h3>
-          <Link to="/">FireChat</Link>
-       </h3>
+       <h3><Link to="/">FireChat</Link></h3>
        <div>
          {
          user ?

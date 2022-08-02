@@ -28,24 +28,26 @@ export default function Login()
 
     if(!Email || !Pass)
     {
-      setData({...data,error:"All fields are required"})
+      setData({...data,error:"All fields are required",loading:false})
     }
-
-    try
+    else
     {
-      const result = await signInWithEmailAndPassword(auth,Email,Pass);
-      // console.log(result);
+      try
+      {
+        const result = await signInWithEmailAndPassword(auth,Email,Pass);
+        // console.log(result);
 
-      await updateDoc(doc(db,"Users",result.user.uid),{
-        isOnline:true
-      })
+        await updateDoc(doc(db,"Users",result.user.uid),{
+          isOnline:true
+        })
 
-      setData({Email:'',Pass:'',error:null,loading:false});
-      navigate('/');
-    }
-    catch(err)
-    {
-      setData({...data,error:err.message,loading:false});
+        setData({Email:'',Pass:'',error:null,loading:false});
+        navigate('/');
+      }
+      catch(err)
+      {
+        setData({...data,error:"Invalid Details",loading:false});
+      }
     }
   }
   return (
@@ -66,6 +68,7 @@ export default function Login()
         {
           error ? <p className="error">{error}</p> : null
         }
+        
         <div className="btn_container">
           <button className="btn" disabled={loading} onClick={(e)=>handleSubmit(e)}>{loading ? "Logging In..." : "Login"}</button>
         </div>
