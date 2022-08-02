@@ -5,7 +5,7 @@ import {auth,db} from "../firebase"
 import {useNavigate} from 'react-router-dom'
 
 
-export default function Register() 
+export default function Register()
 {
   const [data,setData]=useState({
     Name:'',
@@ -31,30 +31,33 @@ export default function Register()
 
     if(!Name || !Email || !Pass)
     {
-      setData({...data,error:"All fields are required"})
+      setData({...data,error:"All fields are required",loading:false});
     }
-
-    try
+    else
     {
-      const result = await createUserWithEmailAndPassword(auth,Email,Pass);
-      // console.log(result);
+      try
+      {
+        const result = await createUserWithEmailAndPassword(auth,Email,Pass);
+        // console.log(result);
 
-      await setDoc(doc(db,"Users",result.user.uid),{
-        uid:result.user.uid,
-        Name,
-        Email,
-        createdAt:Timestamp.fromDate(new Date()),
-        isOnline:true
-      })
+        await setDoc(doc(db,"Users",result.user.uid),{
+          uid:result.user.uid,
+          Name,
+          Email,
+          createdAt:Timestamp.fromDate(new Date()),
+          isOnline:true
+        })
 
       setData({Name:'',Email:'',Pass:'',error:null,loading:false});
       navigate('/');
-    }
-    catch(err)
-    {
-      setData({...data,error:"Invalid Details",loading:false});
+      }
+      catch(err)
+      {
+        setData({...data,error:"Invalid Details",loading:false});
+      }
     }
   }
+  
   return (
     <section>
       <h3>Create an Account</h3>
